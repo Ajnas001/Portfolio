@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajnas C - Graphic Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .category-button.active {
+            background-color: #1e293b;
+            color: white;
+            box-shadow: 0 0 5px #fff;
+        }
+        .category-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .project-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .project-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .project-card img {
+            transition: transform 0.3s ease-in-out;
+        }
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+        #mobile-menu {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            #mobile-menu {
+                display: none;
+                position: absolute;
+                top: 80px;
+                right: 0;
+                background-color: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                border-radius: 0.5rem;
+                padding: 1rem;
+                z-index: 10;
+            }
+            #mobile-menu.active {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow-md py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-semibold text-gray-800">Ajnas C</a>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#work" class="text-gray-700 hover:text-blue-600 transition duration-300">Work</a></li>
+                    <li><a href="#about" class="text-gray-700 hover:text-blue-600 transition duration-300">About</a></li>
+                    <li><a href="#contact" class="text-gray-700 hover:text-blue-600 transition duration-300">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600 focus:outline-none focus:shadow-outline">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+                <div id="mobile-menu" class="hidden absolute top-16 right-0 bg-white shadow-lg rounded-md py-2 px-4 space-y-2">
+                    <a href="#work" class="block text-gray-700 hover:text-blue-600 transition duration-300">Work</a>
+                    <a href="#about" class="block text-gray-700 hover:text-blue-600 transition duration-300">About</a>
+                    <a href="#contact" class="block text-gray-700 hover:text-blue-600 transition duration-300">Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-gradient-to-br from-blue-100 to-purple-100 text-gray-800 py-20 md:py-32">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-semibold mb-4 md:mb-6">Ajnas C</h1>
+            <p class="text-xl md:text-2xl mb-8 md:mb-12">Graphic Designer | 5+ Years of Experience</p>
+            <a href="#work" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full transition duration-300 shadow-md hover:shadow-lg">View My Work</a>
+        </div>
+    </section>
+
+    <section id="work" class="bg-gray-100 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-semibold text-center mb-12 text-gray-800">My Work</h2>
+            <div class="flex justify-center mb-8 flex-wrap gap-4">
+                <button class="category-button bg-white hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-full transition duration-300 active" data-category="all">All</button>
+                <button class="category-button bg-white hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-full transition duration-300" data-category="posters">Posters</button>
+                <button class="category-button bg-white hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-full transition duration-300" data-category="logos">Logos</button>
+                <button class="category-button bg-white hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-full transition duration-300" data-category="calendars">Calendars</button>
+                <button class="category-button bg-white hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-full transition duration-300" data-category="magazines">Magazines</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="project-container">
+                </div>
+        </div>
+    </section>
+
+    <section id="about" class="bg-white py-16">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-semibold mb-6 text-gray-800">About Me</h2>
+                    <p class="text-gray-700 text-lg mb-6">
+                        Hello! I'm Ajnas C, a passionate graphic designer with over 5 years of experience in creating visually compelling designs. I specialize in transforming ideas into impactful visuals that leave a lasting impression.
+                    </p>
+                    <p class="text-gray-700 text-lg mb-6">
+                        My expertise spans across various design disciplines, including branding, print design, and digital media. I'm proficient in industry-standard tools such as Adobe Photoshop, Illustrator, and InDesign, which allows me to bring a high level of creativity and precision to every project.
+                    </p>
+                    <p class="text-gray-700 text-lg">
+                        I believe in a collaborative approach, working closely with clients to understand their vision and deliver solutions that not only meet their needs but also exceed their expectations.
+                    </p>
+                </div>
+                <div>
+                    <img src="placeholder_about.jpg" alt="Ajnas C" class="rounded-lg shadow-lg w-full max-w-md mx-auto rounded-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="bg-gray-100 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-semibold text-center mb-12 text-gray-800">Contact Me</h2>
+            <div class="bg-white rounded-lg shadow-md p-8 max-w-md mx-auto">
+                <p class="text-lg text-gray-700 mb-6">
+                    Feel free to reach out to me for collaborations, inquiries, or just to say hello!
+                </p>
+                <form id="contact-form" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
+                        <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+                        <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message:</label>
+                        <textarea id="message" name="message" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32 resize-y" required></textarea>
+                    </div>
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full transition duration-300 w-full shadow-md hover:shadow-lg">Send Message</button>
+                </form>
+                <div id="message-sent" class="mt-6 text-green-600 text-center font-semibold hidden">
+                    Thank you! Your message has been sent.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto px-4 text-center">
+            &copy; 2024 Ajnas C. All rights reserved.
+            <div class="mt-2 flex justify-center">
+                <a href="https://www.behance.net/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 mr-6 transition duration-300">Behance</a>
+                <a href="https://dribbble.com/" target="_blank" rel="noopener noreferrer" class="hover:text-pink-400 mr-6 transition duration-300">Dribbble</a>
+                <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition duration-300">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const projects = [
+            {
+                title: "Music Fest Poster",
+                category: "posters",
+                imageUrl: "placeholder_poster1.jpg",
+                description: "A vibrant poster design for a music festival.",
+            },
+            {
+                title: "Cityscape Poster",
+                category: "posters",
+                imageUrl: "placeholder_poster2.jpg",
+                description: "A minimalist poster design showcasing a cityscape.",
+            },
+            {
+                title: "Abstract Art Poster",
+                category: "posters",
+                imageUrl: "placeholder_poster3.jpg",
+                description: "An abstract poster design with bold colors and shapes.",
+            },
+            {
+                title: "EcoBloom Logo",
+                category: "logos",
+                imageUrl: "placeholder_logo1.jpg",
+                description: "A logo for a sustainable gardening startup.",
+            },
+            {
+                title: "TechWave Logo",
+                category: "logos",
+                imageUrl: "placeholder_logo2.jpg",
+                description: "A modern logo for a technology company.",
+            },
+            {
+                title: "CreativeSpark Logo",
+                category: "logos",
+                imageUrl: "placeholder_logo3.jpg",
+                description: "A dynamic logo for a creative agency.",
+            },
+            {
+                title: "2024 Wall Calendar",
+                category: "calendars",
+                imageUrl: "placeholder_calendar1.jpg",
+                description: "A minimalist wall calendar design for 2024.",
+            },
+            {
+                title: "Nature Photography Calendar",
+                category: "calendars",
+                imageUrl: "placeholder_calendar2.jpg",
+                description: "A calendar featuring stunning nature photographs.",
+            },
+             {
+                title: "Desktop Calendar",
+                category: "calendars",
+                imageUrl: "placeholder_calendar3.jpg",
+                description: "A modern desktop calendar design.",
+            },
+            {
+                title: "Fashion Magazine",
+                category: "magazines",
+                imageUrl: "placeholder_magazine1.jpg",
+                description: "A high-fashion magazine layout.",
+            },
+            {
+                title: "Travel Magazine",
+                category: "magazines",
+                imageUrl: "placeholder_magazine2.jpg",
+                description: "A vibrant travel magazine design.",
+            },
+            {
+                title: "Art & Culture Magazine",
+                category: "magazines",
+                imageUrl: "placeholder_magazine3.jpg",
+                description: "An art and culture magazine layout.",
+            },
+        ];
+
+        const projectContainer = document.getElementById("project-container");
+        const categoryButtons = document.querySelectorAll(".category-button");
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const contactForm = document.getElementById('contact-form');
+        const messageSent = document.getElementById('message-sent');
+
+
+        function createProjectCard(project) {
+            const card = document.createElement("div");
+            card.classList.add("project-card");
+            card.dataset.category = project.category;
+
+            const image = document.createElement("img");
+            image.src = project.imageUrl;
+            image.alt = project.title;
+            image.classList.add("w-full", "h-48", "object-cover", "rounded-t-md");
+
+            const content = document.createElement("div");
+            content.classList.add("p-6", "bg-white", "rounded-b-md");
+
+            const title = document.createElement("h3");
+            title.classList.add("text-xl", "font-semibold", "mb-2", "text-gray-800");
+            title.textContent = project.title;
+
+            const description = document.createElement("p");
+            description.classList.add("text-gray-600", "text-base");
+            description.textContent = project.description;
+
+            content.appendChild(title);
+            content.appendChild(description);
+            card.appendChild(image);
+            card.appendChild(content);
+
+            return card;
+        }
+
+        function displayProjects(category) {
+            projectContainer.innerHTML = "";
+            projects.forEach((project) => {
+                if (category === "all" || project.category === category) {
+                    const card = createProjectCard(project);
+                    projectContainer.appendChild(card);
+                }
+            });
+        }
+
+        categoryButtons.forEach((button) => {
+            button.addEventListener("click", function () {
+                categoryButtons.forEach((b) => b.classList.remove("active"));
+                this.classList.add("active");
+                const category = this.dataset.category;
+                displayProjects(category);
+            });
+        });
+
+        displayProjects("all");
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        contactForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            // Simulate sending message
+            setTimeout(() => {
+                messageSent.classList.remove('hidden');
+                contactForm.reset();
+                 setTimeout(() => {
+                    messageSent.classList.add('hidden');
+                }, 3000);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
+
+<!-- Placeholder images for projects -->
+<!-- You can replace these with actual image URLs -->  
+<!-- Poster Images -->
+<!-- Placeholder images for projects -->
+<!-- You can replace these with actual image URLs -->
+ 
